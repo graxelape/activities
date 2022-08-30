@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/social/posts/social_post_details_page.dart';
 import 'package:todo_app/social/posts/social_post_page.dart';
 import 'package:todo_app/tweets/posts/tweet_details_page.dart';
+import 'package:todo_app/tweets/posts/tweet_post_page.dart';
 
 import '../../widgets/item_button.dart';
 
@@ -105,7 +106,7 @@ class _TweetsPageState extends State<TweetsPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const TweetsPage(),
+                      builder: (_) => const TweetPage(),
                     ),
                   );
                 },
