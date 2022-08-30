@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/groceries/home/groceries_page.dart';
 import 'package:todo_app/social/home/social_page.dart';
+import 'package:todo_app/tweets/home/tweets_page.dart';
+import 'package:todo_app/tweets/posts/tweet_post_page.dart';
 import 'package:todo_app/typicode/home/typicode_page.dart';
 
 class MenuPage extends StatefulWidget {
@@ -58,11 +60,11 @@ class _MenuPageState extends State<MenuPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) {
-                    return const SocialPage();
+                    return const TweetsPage();
                   }),
                 );
               },
-              title: const Text('Tweets - Firestore'),
+              title: const Text('Tweet - Firestore'),
             ),
           ],
         ),

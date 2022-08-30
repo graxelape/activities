@@ -1,7 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app/social/posts/social_post_details_page.dart';
+import 'package:todo_app/social/posts/social_post_page.dart';
+import 'package:todo_app/tweets/posts/tweet_details_page.dart';
 
 import '../../widgets/item_button.dart';
 
+/// This is an example todo app with real-time database
+/// using Firebase Firestore
 class TweetsPage extends StatefulWidget {
   const TweetsPage({Key? key}) : super(key: key);
 
@@ -10,17 +16,85 @@ class TweetsPage extends StatefulWidget {
 }
 
 class _TweetsPageState extends State<TweetsPage> {
+  /// Initialize a post collection, make sure to use the
+  /// right name for the collection as this is
+  /// case sensitive.
+  final postsCollection =
+      FirebaseFirestore.instance.collection('twitter_posts');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Social'),
+        title: const Text('Tweets'),
       ),
       body: Center(
         child: Stack(
           children: [
-            const Center(
-              child: Text('Hello world!'),
+            StreamBuilder<QuerySnapshot>(
+              stream: postsCollection.snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.docs.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      // Add this to read the document data
+                      final data = snapshot.data!.docs[index].data()
+                          as Map<String, dynamic>;
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) {
+                              return TweetDetailsPage(
+                                id: snapshot.data!.docs[index].id,
+                                title: data['title'],
+                                description: data['description'],
+                                onItemDeleted: () async {
+                                  // Delete
+                                  await postsCollection
+                                      .doc(snapshot.data!.docs[index].id)
+                                      .delete();
+                                },
+                              );
+                            }),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (data['title'] is String)
+                                Text(
+                                  // Add this to read the title property
+                                  data['title'],
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              if (data['description'] is String)
+                                Text(
+                                  // Add this to read the description property
+                                  data['description'],
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
+
+                return const Center(
+                  child: Text('No items found.'),
+                );
+              },
             ),
             Align(
               alignment: Alignment.bottomCenter,

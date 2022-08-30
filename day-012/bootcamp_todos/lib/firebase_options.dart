@@ -51,19 +51,19 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyCCW93C-4oHWqiKK2mH4jBnuaMiqyAG4ms',
-    appId: '1:455855695322:web:908939b458b5bb0713cce3',
-    messagingSenderId: '455855695322',
-    projectId: 'dict-firebase-todo',
-    authDomain: 'dict-firebase-todo.firebaseapp.com',
-    storageBucket: 'dict-firebase-todo.appspot.com',
+    appId: '1:443857941175:android:3612c3ed9139b05e599332',
+    messagingSenderId: '443857941175',
+    projectId: 'socialapp-bcefd',
+    authDomain: 'socialapp-bcefd.firebaseapp.com',
+    storageBucket: 'socialapp-bcefd.appspot.com',
     measurementId: 'G-3MZM3FN95B',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDs5ww_mCkh7TPaYp1bUxx20ZEXw2QpPyI',
-    appId: '1:455855695322:android:35c8689b4a5dd7da13cce3',
-    messagingSenderId: '455855695322',
-    projectId: 'dict-firebase-todo',
-    storageBucket: 'dict-firebase-todo.appspot.com',
+    appId: '1:443857941175:android:3612c3ed9139b05e599332',
+    messagingSenderId: '443857941175',
+    projectId: 'socialapp-bcefd',
+    storageBucket: 'socialapp-bcefd.appspot.com',
   );
 }
